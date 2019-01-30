@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('') {
       steps {
-        mail(subject: 'jenkins', body: 'detect by jenkins', to: 'dormoy.guillaume@gmail.com')
+        emailext(subject: 'jenkins', body: 'jenkins have detect modification', to: 'dormoy.guillaume@gmail.com')
       }
     }
   }
