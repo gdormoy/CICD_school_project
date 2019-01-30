@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('send mail') {
       steps {
         mail(subject: 'jenkins', body: 'jenkins build', to: 'dormoy.guillaume@gmail.com')
       }
