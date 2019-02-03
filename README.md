@@ -11,3 +11,5 @@ Test Pull Request
 Test Docker
 
 Test docker 2
+
+Test On VM
