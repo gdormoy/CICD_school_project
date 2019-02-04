@@ -13,7 +13,19 @@ pipeline {
         }
       }
     }
-    stage('build') {
+    stage('test'){
+      steps{
+        script{
+          if(currentBuild.previousBuild.result == 'FAILUR'){
+            mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
+          }
+          else{
+            mail(subject: 'jenkins', body: 'Build SUCCESS', to: 'dormoy.guillaume@gmail.com')
+          }
+        }
+      }
+    }
+    stage('deployment') {
       steps {
         script{
           docker.withRegistry("https://264868257155.dkr.ecr.eu-west-3.amazonaws.com/cicd-project", "ecr:eu-west-3:aws") {
