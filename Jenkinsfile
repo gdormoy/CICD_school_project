@@ -9,7 +9,7 @@ pipeline {
     stage('Docker build') {
       steps {
         script {
-          docker.build('cicd-project')
+          docker.build('cicd-project:${env.BUILD_ID}')
         }
       }
     }
