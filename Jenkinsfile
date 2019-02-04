@@ -6,7 +6,7 @@ pipeline {
         mail(subject: 'jenkins', body: 'jenkins build', to: 'dormoy.guillaume@gmail.com')
       }
     }
-    stage ('Docker build') {
+    stage('Docker build') {
       steps {
         script {
           docker.build('cicd-project')
