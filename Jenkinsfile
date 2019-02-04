@@ -8,7 +8,9 @@ pipeline {
     }
     stage ('Docker build') {
       steps {
-        docker.build('cicd-project')
+        script {
+          def apitestimage = docker.build('cicd-project', '--no-cache=true dockerbuild')
+        }
       }
     }
   }
