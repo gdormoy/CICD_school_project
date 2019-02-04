@@ -1,11 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('send mail') {
-      steps {
-        mail(subject: 'jenkins', body: 'Build start', to: 'dormoy.guillaume@gmail.com')
-      }
-    }
     stage('Docker build') {
       steps {
         script {
