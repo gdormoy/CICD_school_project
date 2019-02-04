@@ -7,7 +7,7 @@ pipeline {
           try{
             docker.build("cicd-project:1.0.${env.BUILD_ID}")
           }
-          finally {
+          catch(err) {
             mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
           }
         }
@@ -21,7 +21,7 @@ pipeline {
               docker.image("cicd-project:1.0.${env.BUILD_ID}").push()
             }
           }
-          finally {
+          catch(err) {
             mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
           }
         }
