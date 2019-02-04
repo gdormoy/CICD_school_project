@@ -17,7 +17,7 @@ pipeline {
       steps {
         script{
           docker.withRegistry("https://264868257155.dkr.ecr.eu-west-3.amazonaws.com/cicd-project", "ecr:eu-west-3:aws") {
-            docker.image("cicd-test").push()
+            docker.image("cicd-project").push()
           }
         }
       }
