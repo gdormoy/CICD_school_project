@@ -9,7 +9,7 @@ pipeline {
     stage('Docker build') {
       steps {
         script {
-          docker.build('cicd-project', '--no-cache=true dockerbuild')
+          docker.build('cicd-project')
         }
 
       }
