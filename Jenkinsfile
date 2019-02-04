@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('send mail') {
       steps {
-        mail(subject: 'jenkins', body: 'jenkins build', to: 'dormoy.guillaume@gmail.com')
+        mail(subject: 'jenkins', body: 'jenkins start build', to: 'dormoy.guillaume@gmail.com')
       }
     }
     stage('Docker build') {
