@@ -10,7 +10,7 @@ pipeline {
       steps {
         script {
           docker.build("cicd-project:1.0.${env.BUILD_ID}")
-          if(currentBuild.previousBuild.result == 'SUCCESS'){
+          if(currentBuild.result == 'SUCCESS'){
             mail(subject: 'jenkins', body: 'Build SUCCESS', to: 'dormoy.guillaume@gmail.com')
           }
           else{
