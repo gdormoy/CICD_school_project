@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('send mail') {
       steps {
-        mail(subject: 'jenkins', body: 'jenkins start build', to: 'dormoy.guillaume@gmail.com')
+        mail(subject: 'jenkins', body: 'Build start', to: 'dormoy.guillaume@gmail.com')
       }
     }
     stage('Docker build') {
@@ -20,6 +20,11 @@ pipeline {
             docker.image("cicd-project").push()
           }
         }
+      }
+    }
+    stage('send mail') {
+      steps {
+        mail(subject: 'jenkins', body: 'Build success', to: 'dormoy.guillaume@gmail.com')
       }
     }
   }
