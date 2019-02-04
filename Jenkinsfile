@@ -9,7 +9,7 @@ pipeline {
     stage ('Docker build') {
       steps {
         script {
-          def apitestimage = docker.build('cicd-project')
+          docker.build('cicd-project')
         }
       }
     }
