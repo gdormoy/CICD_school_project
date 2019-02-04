@@ -10,12 +10,6 @@ pipeline {
       steps {
         script {
           docker.build("cicd-project:1.0.${env.BUILD_ID}")
-        }
-      }
-    }
-    stage('test'){
-      steps{
-        script{
           if(currentBuild.previousBuild.result == 'FAILUR'){
             mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
           }
