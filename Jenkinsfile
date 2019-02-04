@@ -22,7 +22,7 @@ pipeline {
         }
       }
     }
-    stage('send mail') {
+    stage('end send mail') {
       steps {
         mail(subject: 'jenkins', body: 'Build success', to: 'dormoy.guillaume@gmail.com')
       }
