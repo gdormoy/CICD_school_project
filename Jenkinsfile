@@ -11,11 +11,12 @@ pipeline {
             mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
           }
         }
+
       }
     }
     stage('deployment') {
       steps {
-        script{
+        script {
           try{
             docker.withRegistry("https://264868257155.dkr.ecr.eu-west-3.amazonaws.com/cicd-project", "ecr:eu-west-3:aws") {
               docker.image("cicd-project:1.0.${env.BUILD_ID}").push()
@@ -25,11 +26,21 @@ pipeline {
             mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
           }
         }
+
       }
     }
     stage('send mail') {
-      steps {
-        mail(subject: 'jenkins', body: 'Build END', to: 'dormoy.guillaume@gmail.com')
+      parallel {
+        stage('send mail') {
+          steps {
+            mail(subject: 'jenkins', body: 'Build END', to: 'dormoy.guillaume@gmail.com')
+          }
+        }
+        stage('') {
+          steps {
+            emailext(subject: 'jenkins', body: 'test', attachLog: true, to: 'dormoy.guillaume@gmail.com')
+          }
+        }
       }
     }
   }
