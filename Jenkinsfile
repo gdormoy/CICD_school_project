@@ -1,4 +1,7 @@
 pipeline {
+  environment {
+    BUILD_STATUS = "SUCCESS"
+  }
   agent any
   stages {
     stage('Docker build') {
@@ -8,7 +11,7 @@ pipeline {
             docker.build("cicd-project:1.0.${env.BUILD_ID}")
           }
           catch(err) {
-            mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
+            BUILD_STATUS = "FAILED"
           }
         }
 
@@ -23,7 +26,7 @@ pipeline {
             }
           }
           catch(err) {
-            mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
+            BUILD_STATUS = "FAILED"
           }
         }
 
@@ -33,12 +36,14 @@ pipeline {
       parallel {
         stage('send mail') {
           steps {
-            mail(subject: 'jenkins', body: 'Build END', to: 'dormoy.guillaume@gmail.com')
-          }
-        }
-        stage('send mail2') {
-          steps {
-            emailext(subject: 'jenkins', body: 'test', attachLog: true, to: 'dormoy.guillaume@gmail.com')
+            script{
+              if(BUILD_STATUS == "SUCCESS"){
+                mail(subject: 'jenkins', body: 'Build SUCCESS', to: 'dormoy.guillaume@gmail.com')
+              }
+              else{
+                mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
+              }
+            }
           }
         }
       }
