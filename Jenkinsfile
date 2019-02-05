@@ -36,7 +36,7 @@ pipeline {
             mail(subject: 'jenkins', body: 'Build END', to: 'dormoy.guillaume@gmail.com')
           }
         }
-        stage('') {
+        stage('send mail2') {
           steps {
             emailext(subject: 'jenkins', body: 'test', attachLog: true, to: 'dormoy.guillaume@gmail.com')
           }
