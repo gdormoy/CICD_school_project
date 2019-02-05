@@ -33,17 +33,13 @@ pipeline {
       }
     }
     stage('send mail') {
-      parallel {
-        stage('send mail') {
-          steps {
-            script{
-              if(BUILD_STATUS == "SUCCESS"){
-                mail(subject: 'jenkins', body: 'Build SUCCESS', to: 'dormoy.guillaume@gmail.com')
-              }
-              else{
-                mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
-              }
-            }
+      steps {
+        script{
+          if(BUILD_STATUS == "SUCCESS"){
+            mail(subject: 'jenkins', body: 'Build SUCCESS', to: 'dormoy.guillaume@gmail.com')
+          }
+          else{
+            mail(subject: 'jenkins', body: 'Build FAILED', to: 'dormoy.guillaume@gmail.com')
           }
         }
       }
