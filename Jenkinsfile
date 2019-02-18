@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+    stage('sonaqube analyse') {
+      steps {
+        sh 'sonar:sonar'
+      }
+    }
     stage('Java build') {
       steps {
         sh 'mvn clean install'
