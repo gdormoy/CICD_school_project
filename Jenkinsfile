@@ -1,8 +1,8 @@
 pipeline {
   agent any
   tools {
-    maven 'maven 3'
-    jdk 'java 8'
+    maven "maven 3"
+    jdk "java 8"
   }
   stages {
     stage ('Initialize') {
@@ -15,7 +15,7 @@ pipeline {
     }
     stage('Java build') {
       steps {
-        sh 'mvn clean install'
+        sh "mvn clean install"
       }
     }
     stage('Docker build') {
