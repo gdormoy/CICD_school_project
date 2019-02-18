@@ -1,7 +1,4 @@
 pipeline {
-  environment {
-    BUILD_STATUS = "SUCCESS"
-  }
   agent any
   stages {
     stage('Docker build') {
