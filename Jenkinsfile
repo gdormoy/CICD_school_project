@@ -1,10 +1,11 @@
 pipeline {
   agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
+    docker {
+      image 'maven:3-alpine'
+      args '-v /root/.m2:/root/.m2'
     }
+
+  }
   stages {
     stage('Java build') {
       steps {
@@ -16,6 +17,7 @@ pipeline {
         script {
           docker.build("cicd-project:1.0.${env.BUILD_ID}")
         }
+
       }
     }
     stage('deployment') {
@@ -25,13 +27,15 @@ pipeline {
             docker.image("cicd-project:1.0.${env.BUILD_ID}").push()
           }
         }
+
       }
     }
     stage('send mail') {
       steps {
-        script{
+        script {
           mail(subject: 'jenkins', body: 'Build SUCCESS', to: 'dormoy.guillaume@gmail.com')
         }
+
       }
     }
   }
