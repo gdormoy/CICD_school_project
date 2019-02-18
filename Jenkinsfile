@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('sonaqube analyse') {
       steps {
-        sh 'sonar:sonar'
+        sh 'mvn sonar:sonar'
       }
     }
     stage('Java build') {
